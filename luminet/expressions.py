@@ -79,7 +79,7 @@ def generate_Q_expression() -> sy.Symbol:
         Symbolic expression representing Q
     """
     # Define symbols for periastron distance (periastron) and black hole mass (mass)
-    periastron_distance, black_hole_mass = sy.symbols("periastron_distance black_hole_mass")
+    periastron_distance, black_hole_mass = sy.symbols("P, M")
 
     # Calculate the expression for Q using the given formula
     Q_expression = sy.sqrt((periastron_distance - 2 * black_hole_mass) * (periastron_distance + 6 * black_hole_mass))
@@ -97,7 +97,7 @@ def generate_b_expression() -> sy.Symbol:
         Symbolic expression for b
     """
     # Define symbols for periastron distance (periastron) and black hole mass (mass)
-    periastron_distance, black_hole_mass = sy.symbols("periastron_distance black_hole_mass")
+    periastron_distance, black_hole_mass = sy.symbols("P, M")
 
     # Calculate the expression for b using the corrected formula
     # Dimensional analysis suggests taking the square root of P**3/(P-2M)
@@ -118,7 +118,7 @@ def generate_inverse_r_expression() -> sy.Symbol:
     # Define symbols for periastron distance (periastron), black hole mass (mass),
     # dimensionless periastron distance (q), dimensionless radial coordinate (u),
     # and the modulus of the elliptic function (k)
-    periastron_distance, black_hole_mass, q, u, k = sy.symbols("periastron_distance black_hole_mass q u k")
+    periastron_distance, black_hole_mass, q, u, k = sy.symbols("P, M, Q, u, k")
     # Define elliptic function sn
     elliptic_function_sn = sy.Function("sn")
 
@@ -146,7 +146,7 @@ def generate_argument_to_sn_expression() -> sy.Symbol:
         Symbolic expression for the argument of sn
     """
     # Define symbols for gamma, zeta_inf, k, p, q, and n as per Luminet (1977)
-    gamma, zeta_inf, k, p, q, n = sy.symbols("gamma zeta_inf k p q n")
+    gamma, zeta_inf, k, p, q, n = sy.symbols("gamma, zeta_inf, k, P, Q, N")
 
     # Define the Piecewise expression to handle different cases in equation 13
     argument_to_sn_expression = sy.Piecewise(
@@ -176,7 +176,7 @@ def generate_gamma_expression() -> sy.Symbol:
         Symbolic expression for gamma
     """
     # Define symbols for alpha and theta_0 as per Luminet (1977)
-    alpha, theta_0 = sy.symbols("alpha theta_0")
+    alpha, theta_0 = sy.symbols("alpha, theta_0")
 
     # Define the expression for gamma using equation 10 from Luminet (1977)
     gamma_expression = sy.acos(
@@ -196,7 +196,7 @@ def generate_k_expression() -> sy.Symbol:
         Symbolic expression for k
     """
     # Define symbols for P, M, and Q as per Luminet (1977)
-    p, m, q = sy.symbols("P M Q")
+    p, m, q = sy.symbols("P, M, Q")
 
     # Define the expression for k using equation 12 from Luminet (1977)
     k_expression = sy.sqrt((q - p + 6 * m) / (2 * q))
@@ -214,7 +214,7 @@ def generate_zeta_inf_expression() -> sy.Symbol:
         Symbolic expression for zeta_inf
     """
     # Define symbols for P, M, and Q as per Luminet (1977)
-    p, m, q = sy.symbols("P M Q")
+    p, m, q = sy.symbols("P, M, Q")
 
     # Define the expression for zeta_inf using equation 12 from Luminet (1977)
     zeta_inf_expression = sy.asin(sy.sqrt((q - p + 2 * m) / (q - p + 6 * m)))
@@ -232,7 +232,7 @@ def generate_ellipse_expression() -> sy.Symbol:
         Symbolic expression for an ellipse viewed at an inclination of theta_0
     """
     # Define symbols for r, alpha, and theta_0
-    r, alpha, theta_0 = sy.symbols("r alpha theta_0")
+    r, alpha, theta_0 = sy.symbols("r, alpha, theta_0")
 
     # Define the expression for the ellipse using the formula
     ellipse_expression = r / sy.sqrt(1 + (sy.tan(theta_0) ** 2) * (sy.cos(alpha) ** 2))

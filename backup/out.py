@@ -9,8 +9,8 @@ import numpy as np
 import numpy.typing as npt
 import scipy.interpolate as si
 
-import backup.bh as bh
-from backup.data import Isoradial
+import bh as bh
+from data import Isoradial
 
 plt.style.use("dark_background")
 plt.rcParams["axes.labelsize"] = 16

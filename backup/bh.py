@@ -8,7 +8,7 @@ import pandas as pd
 import scipy.special as sp
 import sympy as sy
 
-import backup.util as util
+import util as util
 
 
 def expr_q() -> sy.Symbol:

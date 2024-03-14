@@ -7,10 +7,11 @@ import matplotlib.pyplot as plt
 import matplotlib.transforms as mt
 import numpy as np
 import scipy.interpolate as si
+from datetime import datetime
 
-from luminet.isoradials import Isoradial
-from luminet.functions import reorient_alpha, impact_parameter
-from luminet.generate_blackhole import generate_image_data
+from isoradials import Isoradial
+from functions import reorient_alpha, impact_parameter
+from blackhole import generate_blackhole_data
 
 plt.style.use("dark_background")
 plt.rcParams["axes.labelsize"] = 16
@@ -109,7 +110,7 @@ def generate_scatter_image(
         Image of the given black hole isoradials.
     """
     theta_0 = th0 * np.pi / 180
-    df = generate_image_data(alpha, r_vals, theta_0, n_vals, m, {"max_steps": 3})
+    df = generate_blackhole_data(alpha, r_vals, theta_0, n_vals, m, {"max_steps": 3})
 
     if ax is None:
         fig, ax = plt.subplots(figsize=(10, 10), subplot_kw={"projection": "polar"})
@@ -160,7 +161,7 @@ def generate_image(
         Image of the given black hole isoradials.
     """
     theta_0 = th0 * np.pi / 180
-    df = generate_image_data(alpha, r_vals, theta_0, n_vals, m, {"max_steps": 3})
+    df = generate_blackhole_data(alpha, r_vals, theta_0, n_vals, m, {"max_steps": 3})
 
     if ax is None:
         _, ax = plt.subplots(figsize=(30, 30))
@@ -205,3 +206,44 @@ def generate_image(
     ax.set_ylim(edges[:, 1].min(), edges[:, 1].max())
 
     return ax.get_figure()
+
+def generate_and_save_plots(th0, alpha, r_vals, n_vals, m, dpi):
+    """
+    Generates and saves various plots based on the provided parameters,
+    appending the current datetime to filenames and allowing for DPI specification.
+
+    Parameters:
+    - th0: Initial angle theta0.
+    - alpha: Numpy array of alpha values.
+    - r_vals: Numpy array of radial values.
+    - n_vals_list: List of lists, where each sublist contains n values for a specific plot.
+    - m: Scalar value for the mass parameter.
+    - dpi: Dots per inch for the output images.
+    """
+
+    # Ensure n_vals_list contains lists for each type of plot to be generated
+    #assert len(n_vals_list) == 3, "n_vals_list must contain three sublists for the three types of plots."
+
+    # Current datetime string for file naming
+    datetime_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # Generate scatter image for n_vals[0]
+    fig = generate_scatter_image(None, alpha, r_vals, th0, n_vals, m, None)
+    fig.savefig(f'blackhole_scatter_0_{datetime_str}.png', dpi=dpi)
+    fig.savefig(f'blackhole_scatter_0_{datetime_str}.svg', dpi=dpi)
+    plt.close(fig)  # Close the figure to free memory
+
+    # Generate isoradials for n_vals[2]
+    fig = generate_isoradials(th0, r_vals, n_vals)
+    fig.savefig(f'blackhole_isoradials_{datetime_str}.png', dpi=dpi)
+    fig.savefig(f'blackhole_isoradials_{datetime_str}.svg', dpi=dpi)
+    plt.close(fig)  # Close the figure to free memory
+
+    # Example for generating a generic image (adjust parameters as necessary)
+    # Assuming n_vals_list[1] is used for a specific plot type as an example
+    fig, ax = plt.subplots(figsize=(40, 40))
+    fig = generate_image(ax, alpha, r_vals, th0, n_vals, m, None)
+    fig.savefig(f'blackhole_{datetime_str}.png', dpi=dpi)
+    fig.savefig(f'blackhole_{datetime_str}.svg', dpi=dpi)
+
+    plt.close(fig)  # Close the figure to free memory

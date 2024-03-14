@@ -1,7 +1,6 @@
 """Data containers for black hole simulations."""
 import pandas as pd
 
-
 class Isoradial:
     """Data container for isoradial curves."""
 

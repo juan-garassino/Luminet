@@ -1,5 +1,5 @@
 import multiprocessing as mp
-from typing import Any, Callable, Dict, Iterable, Optional, Tuple, Union
+from typing import Iterable
 
 import numpy as np
 import numpy.typing as npt
@@ -7,11 +7,11 @@ import pandas as pd
 import scipy.special as sp
 import sympy as sy
 
-from luminet.functions import simulate_flux
-from luminet.expressions import generate_redshift_expression
-from luminet.utils import *
+from functions import simulate_flux
+from expressions import generate_redshift_expression
+from utils import *
 
-def generate_image_data(
+def generate_blackhole_data(
     alpha: npt.NDArray[np.float64],
     r_vals: Iterable[float],
     theta_0: float,
