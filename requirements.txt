@@ -1,0 +1,9 @@
+numpy
+scipy
+pandas
+rich
+cmocean
+matplotlib
+numba
+sympy
+black
