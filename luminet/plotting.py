@@ -9,9 +9,9 @@ import numpy as np
 import scipy.interpolate as si
 from datetime import datetime
 
-from isoradials import Isoradial
-from functions import reorient_alpha, impact_parameter
-from blackhole import generate_blackhole_data
+from luminet.isoradials import Isoradial
+from luminet.functions import reorient_alpha, impact_parameter
+from luminet.blackhole import generate_blackhole_data
 
 plt.style.use("dark_background")
 plt.rcParams["axes.labelsize"] = 16

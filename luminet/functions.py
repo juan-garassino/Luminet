@@ -2,9 +2,9 @@ from typing import Any, Callable, Dict, Optional, Tuple, Union
 import numpy as np
 import scipy.special as sp
 import sympy as sy
-import utils as util
 
-from expressions import (generate_ellipse_expression,
+import luminet.utils as util
+from luminet.expressions import (generate_ellipse_expression,
                                     generate_argument_to_sn_expression,
                                     generate_b_expression,
                                     generate_bolometric_flux_expression,

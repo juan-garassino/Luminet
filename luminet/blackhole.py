@@ -7,9 +7,9 @@ import pandas as pd
 import scipy.special as sp
 import sympy as sy
 
-from functions import simulate_flux
-from expressions import generate_redshift_expression
-from utils import *
+from luminet.functions import simulate_flux
+from luminet.expressions import generate_redshift_expression
+from luminet.utils import *
 
 def generate_blackhole_data(
     alpha: npt.NDArray[np.float64],
