@@ -1,15 +1,17 @@
-# setup.py
-from setuptools import setup
 from setuptools import find_packages
+from setuptools import setup
 
-# list dependencies from file
-with open("requirements.txt") as f:
+with open('requirements.txt') as f:
     content = f.readlines()
-requirements = [x.strip() for x in content]
+requirements = [x.strip() for x in content if 'git+' not in x]
 
-setup(
-    name="luminet",
-    description="package description",
-    packages=find_packages(),  # NEW: find packages automatically
-    install_requires=requirements,
-)  # NEW
+setup(name='luminet',
+      version="1.0",
+      description="Project Description",
+      packages=find_packages(),
+      install_requires=requirements,
+      test_suite='tests',
+      # include_package_data: to install data from MANIFEST.in
+      include_package_data=True,
+      # scripts=['scripts/luminet-run'],
+      zip_safe=False)
